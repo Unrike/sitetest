@@ -4,6 +4,7 @@ from django.http import HttpResponse, HttpRequest
 from .forms import UserForm, LoginForm
 from .models import UserModel
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
 
@@ -39,7 +40,7 @@ def user_login(request):
             if user is not None:
                     login(request, user)
                     return render(request, 'myapp/suc_login.html')
-            else:
+            else:#elif cd['username'] in User.objects.all.username:
                 form.add_error('username', 'Wrong password')
                 #return HttpResponse('Invalid login', status_code=401)
     else:
