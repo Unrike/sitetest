@@ -1,0 +1,55 @@
+{% extends "myapp/base.html" %}
+
+{% block body %}
+{% if user.is_authenticated %}
+<title>Log-in</title>
+<div class="container-fluid">
+    <div class="row justify-content-end">
+        <div class = "col-4" align=center>
+            <h1 align = "center">{{user.get_username}},  вы уже авторизованы</h1>
+        </div>
+        <div class="col-4" align = right>
+            <table align = right>
+                    {% if user.is_authenticated %}
+                    <td align=right>Текущий пользователь: {{user.get_username}}</td>
+                    {% else %}
+                    <td align = right>Текущий пользователь: Гость</td>
+                    {%endif%}
+                    <tr align = right><td><a href = "{%url 'myapp:show'%}">Показать все записи</a></td></tr>
+                    <tr align = right><td><a href = "{%url 'myapp:form'%}">Добавить данные</a></td></tr>
+                    <tr align = right>
+                    {% if user.is_authenticated %}
+                        <td align = right><a href = "{%url 'myapp:user_logout'%}">Выйти из системы</a></td>
+                    {% else %}
+                        <td align = right><a href = "{%url 'myapp:user_login'%}">Войти в систему</a></td>
+                    {% endif %}
+                    </tr>
+            </table>
+        </div>
+    </div>
+</div>
+{%else%}
+    <title>Log-in</title>
+    <h1 align = "center">Вход</h1>
+    <p align="center">Для того чтобы войти в учётную запись, введите логин и пароль</p>
+    <form action="." method="post" class="needs-validation" novalidate>
+        {% csrf_token %}
+    <div class = "container w-25">
+        <div class="form-group mb-1">
+           <input type="login" class="form-control" id="LoginControlInput" placeholder="Логин" required>
+           <div class="imvalid-feedback">
+            Логин не может быть пустым
+            </div> 
+        </div>
+        <div class="form-group mb-1">
+           <input type="password"  class = "form-control" id="PasswordControlInput" placeholder="Пароль" required>
+           <div class="imvalid-feedback">
+            Пароль не может быть пустым
+            </div>      
+        </div>
+        <button colspan = 2 type="submit" class="btn btn-primary">Войти</button>
+    </div>
+
+    </form>
+{%endif%}
+{% endblock %}

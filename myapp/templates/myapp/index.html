@@ -1,0 +1,66 @@
+{% extends "myapp/base.html" %}
+    {%block body%}
+        <title>User tab</title>
+            <div class="container-fluid">
+                <div class="row justify-content-end">
+                    <div class ="col-4" align = center>
+                        <h2>Отправка формы</h2>
+                        <form action="" method="POST" >
+                        {%csrf_token%}
+                        <table>
+                            {{form.as_table}}
+                            <tr align = center><td colspan = 2> <div id="Popup">
+                                <p>Дорогой гость, <a href= "{% url 'myapp:user_login'%}">авторизуйтесь</a> для начала!</p>
+                            </div></td></tr>
+                            {% if user.is_authenticated %}
+                                <td align = "center" colspan = 2><input  type="submit" value="Отправить"></td>
+                            {% else %}
+                                <td align = "center" colspan = 2><button type="button" class="btn btn-primary" onclick="myFunction()">Отправить</button></td>
+                            {% endif %}
+
+                        </table>
+                        </form>
+                    </div>
+                    <div class="col-4" align = right>
+                        <table align = right>
+                                {% if user.is_authenticated %}
+                                <td>Текущий пользователь: {{user.get_username}}</td>
+                                {% else %}
+                                <td>Текущий пользователь: Гость</td>
+                                {%endif%}
+                                <tr align = right><td><a href = "{%url 'myapp:show'%}">Показать все записи</a></td></tr>
+                                <tr align = right>
+                                {% if user.is_authenticated %}
+                                    <td><a href = "{%url 'myapp:user_logout'%}">Выйти из системы</a></td>
+                                {% else %}
+                                    <td><a href = "{%url 'myapp:user_login'%}">Войти в систему</a></td>
+                                {% endif %}
+                                </tr>
+                        </table>
+                    </div>
+                </div>
+<div id="Popup">
+    <p>Дорогой гость, <a href= "{% url 'myapp:user_login'%}">авторизуйтесь</a> для начала!</p>
+</div>
+<script>
+    function myFunction() {
+      var popup = document.getElementById('Popup');
+      popup.classList.toggle('show');
+    }
+</script>
+<style>
+    #Popup {
+        display: none;
+        z-index: 1;
+        text-align: center;
+    }
+  
+    #Popup.show {
+
+        display: block;
+    }
+
+
+</style>
+
+{%endblock%}

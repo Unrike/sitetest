@@ -1,0 +1,46 @@
+{% extends "myapp/base.html" %}
+    {%block body%}
+    <div class = "container-fluid">
+    <div class = "row justify-content-end">
+        <div class = "col-4" align = center>
+        {% if user_list %}
+        
+            <h1 align = center>Таблица записей</h1>
+            <table align = center class="table table-striped">
+                <th>
+                    First name
+                <td>Last name</td>
+                <td>Age</td>
+                </th>
+            {% for user in user_list %}
+                <tr>
+                    <td>{{user.first_name}}</td>
+                    <td>{{user.second_name}}</td>
+                    <td>{{user.age}}</td>
+                </tr>
+            {% endfor %}
+            </table>
+        {% else %}
+            <p>No users here.</p>
+        {% endif %}
+        </div>
+        <div class = "col-4" align="right">
+        <table align = right>
+        {% if user.is_authenticated %}
+        <td style ="padding: 0; border: 0;">Текущий пользователь: {{user.get_username}}</td>
+        {% else %}
+        <td style ="padding: 0; border: 0;">Текущий пользователь: Гость</td>
+        {%endif%}
+        <tr align = right><td style ="padding: 0; border: 0;"><a href = "{% url 'myapp:form'%}">Добавить данные</a></td></tr>
+        <tr align = right><td style ="padding: 0; border: 0;"><a href = "{% url 'myapp:user_logout'%}">Выйти из системы</a></td></tr>
+        </table>
+        </div>
+    </div>
+</div>
+        <style>
+            TD, TH {
+                padding: 3px; /* Поля вокруг содержимого таблицы */
+                border: 1px solid black; /* Параметры рамки */
+            }
+        </style>
+{%endblock%}

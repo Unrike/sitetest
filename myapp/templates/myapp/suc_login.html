@@ -1,0 +1,23 @@
+{% extends "myapp/base.html" %}
+    {%block body%}
+    <title>Log-in</title>
+    <div class = "container-fluid">
+        <div class = "row justify-content-end">
+            <div class="col-4" align = center>
+                <h1 align = center>Поздравляю, {{user.get_username}},вы успешно вошли в систему</h1>
+            </div>
+            <div class="col-4" align = right>
+                <table align = right>
+                    {% if user.is_authenticated %}
+                    <td>Текущий пользователь: {{user.get_username}}</td>
+                    {% else %}
+                    <td>Текущий пользователь: Гость</td>
+                    {%endif%}
+                    <tr><td align = right><a href = "{%url 'myapp:show'%}">Показать все записи</a></td>
+                    <tr align = right><td><a href = "{% url 'myapp:form'%}">Добавить данные</a></td></tr>
+                    <td align = right><a href = "{%url 'myapp:user_logout'%}">Выйти из системы</a></td>
+                </table>
+            </div>
+        </div>
+    </div>
+    {%endblock%}
