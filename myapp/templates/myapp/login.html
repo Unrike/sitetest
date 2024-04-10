@@ -35,18 +35,18 @@
     <form action="." method="post" class="needs-validation" novalidate>
         {% csrf_token %}
     <div class = "container w-25">
+        {% for field in form %}
         <div class="form-group mb-1">
-           <input type="login" class="form-control" id="LoginControlInput" placeholder="Логин" required>
-           <div class="imvalid-feedback">
-            Логин не может быть пустым
+            <label> {{field.label}}</label>
+           <input class="form-control {% if field.errors %}is-invalid{% endif %}" name='{{field.name}}' required value="{{field.value|default_if_none:""}}">
+           {% if field.errors %}
+           <div class="invalid-feedback">
+            {{field.errors}}
             </div> 
+            {% endif %}
         </div>
-        <div class="form-group mb-1">
-           <input type="password"  class = "form-control" id="PasswordControlInput" placeholder="Пароль" required>
-           <div class="imvalid-feedback">
-            Пароль не может быть пустым
-            </div>      
-        </div>
+        {% endfor %}
+        {% comment %} {{form.as_p}} {% endcomment %}
         <button colspan = 2 type="submit" class="btn btn-primary">Войти</button>
     </div>
 

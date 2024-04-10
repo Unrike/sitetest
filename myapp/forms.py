@@ -9,5 +9,5 @@ class UserForm(forms.ModelForm):
 
 
 class LoginForm(forms.Form):
-    username = forms.CharField()
-    password = forms.CharField(widget=forms.PasswordInput)
+    username = forms.CharField(label='Login', widget=forms.TextInput(attrs={'placeholder': 'Gktaasd fadsf'}))
+    password = forms.CharField(widget=forms.PasswordInput, label='Passsword')
