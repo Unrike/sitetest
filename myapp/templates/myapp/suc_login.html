@@ -13,9 +13,9 @@
                     {% else %}
                     <td>Текущий пользователь: Гость</td>
                     {%endif%}
-                    <tr><td align = right><a href = "{%url 'myapp:show'%}">Показать все записи</a></td>
-                    <tr align = right><td><a href = "{% url 'myapp:form'%}">Добавить данные</a></td></tr>
-                    <td align = right><a href = "{%url 'myapp:user_logout'%}">Выйти из системы</a></td>
+                    <tr><td align = right><a class="btn btn-primary" href = "{%url 'myapp:show'%}">Показать все записи</a></td>
+                    <tr align = right><td><a class="btn btn-primary" href = "{% url 'myapp:form'%}">Добавить данные</a></td></tr>
+                    <td align = right><a class="btn btn-primary" href = "{%url 'myapp:user_logout'%}">Выйти из системы</a></td>
                 </table>
             </div>
         </div>

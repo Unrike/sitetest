@@ -35,21 +35,19 @@
     <form action="." method="post" class="needs-validation" novalidate>
         {% csrf_token %}
     <div class = "container w-25">
-        {% for field in form %}
-        <div class="form-group mb-1">
+        <div class="form-group mb-10">
+            {% for field in form %}
             <label> {{field.label}}</label>
-           <input class="form-control {% if field.errors %}is-invalid{% endif %}" name='{{field.name}}' required value="{{field.value|default_if_none:""}}">
-           {% if field.errors %}
-           <div class="invalid-feedback">
-            {{field.errors}}
-            </div> 
-            {% endif %}
+            <input class="form-control {% if field.errors %}is-invalid{% endif %}" name='{{field.name}}' required value="{{field.value|default_if_none:""}}">
+            {% if field.errors %}
+            <div class="invalid-feedback">
+                {{field.errors}}
+                </div> 
+                {% endif %}
+            {% endfor %}
+            <button type="submit" class="btn btn-primary mt-1">Войти</button>
         </div>
-        {% endfor %}
-        {% comment %} {{form.as_p}} {% endcomment %}
-        <button colspan = 2 type="submit" class="btn btn-primary">Войти</button>
     </div>
-
     </form>
 {%endif%}
 {% endblock %}
