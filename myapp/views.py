@@ -23,6 +23,7 @@ def index(request: HttpRequest):
         form = UserForm(request.POST)
         if form.is_valid():
             form.save()
+            form = UserForm()
     context = {'form':form}
     return render(request, "myapp/index.html", context)
 
