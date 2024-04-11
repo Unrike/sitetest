@@ -42,9 +42,9 @@ def user_login(request):
                     login(request, user)
                     return render(request, 'myapp/suc_login.html')
             elif not User.objects.filter(username=cd['username']).exists():
-                form.add_error('username', 'Wrong login')
+                form.add_error('username', 'Неверный логин')
             else:
-                form.add_error('password', 'Wrong passsword')
+                form.add_error('password', 'Неверный пароль')
     else:
         form = LoginForm()
     return render(request, 'myapp/login.html', {'form': form})

@@ -3,7 +3,7 @@ from django.forms import ValidationError
 
 def validate_zero(value):
     if value < 0:
-        raise ValidationError("Age must be greater than 0")
+        raise ValidationError("Возраст не может быть отрицательным")
 
 class UserModel(models.Model):
     first_name = models.CharField(max_length=200)
